@@ -90,7 +90,7 @@ const Header = ({user}) => {
         <>
         <div>
           <ul className="middleHeader flex gap-16 font-semibold text-lg cursor-pointer">
-            <li onClick={(e)=>{navigate('/profile')}} >Home</li>
+            <li onClick={(e)=>{navigate('/')}} >Home</li>
           </ul>
         </div>
 
