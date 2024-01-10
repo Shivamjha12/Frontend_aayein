@@ -2,54 +2,45 @@
 
 import React, { useState } from 'react';
 
-const AddContact = () => {
-  // State for capturing contact details
-  const [contact, setContact] = useState({
-    name: '',
-    email: '',
-    phone: '',
-  });
-
+const AddContact = ({currentUser}) => {
+ 
+  
   // Handle input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setContact({
-      ...contact,
-      [name]: value,
-    });
-  };
-
+  const [email,setEmail]=useState('')
+  const productionUrl = 'https://backend-api-8pga.onrender.com';
   // Handle form submission
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     // You can add your logic here to save the contact details, e.g., send to a server or update state.
-    console.log('Contact details submitted:', contact);
+    console.log('Contact details submitted:', currentUser," ",email);
     // Reset the form after submission
-    setContact({
-      name: '',
-      email: '',
-      phone: '',
-    });
+    const data = {
+      "current_user":currentUser,
+      "friendmail":email
+    }
+    const response = await fetch(`${productionUrl}/api/v1/addfriend`,{
+      method: "POST",
+      headers: {
+           "Content-Type": "application/json"
+      },
+      credentials:'include',
+      body: JSON.stringify(data)
+      });
+      const content = await response.json();
+      console.log(content, JSON.stringify(data));
+      setEmail('');
+      if(content.message === 'Friend added successfully'){
+        alert("Friend added successfully");
+      } else {
+        alert("Friend already added or something Wrong Happened Try Again");
+      }
+    
   };
 
   return (
     <div className="container mx-auto pt-24 h-screen  bg-gradient-to-t from-black via-black to-gray-800">
       <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 border rounded shadow">
         <h2 className="text-2xl font-semibold mb-4">Add Contact</h2>
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-600 text-sm font-semibold mb-2">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={contact.name}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-        </div>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-600 text-sm font-semibold mb-2">
             Email
@@ -58,8 +49,8 @@ const AddContact = () => {
             type="email"
             id="email"
             name="email"
-            value={contact.email}
-            onChange={handleInputChange}
+            value={email}
+            onChange={(e)=>{setEmail(e.target.value)}}
             className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
             required
           />

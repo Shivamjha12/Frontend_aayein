@@ -1,13 +1,13 @@
 import React,{useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import coin from "../Assets/icons/coin.png";
+import coinIcon from "../Assets/icons/coinIcon.png";
 import {useNavigate} from "react-router-dom";
 import Cookies from 'js-cookie';
 const Header = ({user}) => {
-  const [coin,setCoin]=useState(null);
+  const [coin,setCoin]=useState('0');
   const navigate = useNavigate();
-    const production_url = 'https://97aa285b-a2b1-4f48-95c6-3a55e1d24c0e-00-3phaaqjxkkrnz.riker.replit.dev';
+    const production_url = 'https://backend-api-8pga.onrender.com';
 
 
 
@@ -19,12 +19,22 @@ const Header = ({user}) => {
         credentials:'include',
         });
         const content = await response.json();
-        setCoin(content);
-        console.log("coinssssssssssss",content);
+        if(content.coins.coins === null){
+          setCoin('0');
+        } else {
+          setCoin(content.coins.coins);
+        }
+          // setCoin(0);
+        // } else { setCoin(content); }
+        
+        // console.log("coinssssssssssss",typeof(content.coins.coins));
+
     }
 
 
-
+    useEffect(()=>{
+      getCoins();
+    })
 
     async function handleLogout(e){
       e.preventDefault();
@@ -45,7 +55,7 @@ const Header = ({user}) => {
 
     useEffect(() => {
       console.log("re render the navigation");
-      getCoins();
+      
       console.log("----------------------------------user in head------------------------",user)
     },[handleLogout])
 
@@ -82,8 +92,8 @@ const Header = ({user}) => {
         </div>
 
         <div className="flex justify-center items-center">
-          <img className="w-14 h-14 rounded-full" src={coin} alt="coinimage" />
-          <p className="text-2xl font-bold" >0</p>
+          <img className="w-12 h-12 rounded-full" src={coinIcon} alt="coinimage" />
+          <p className="text-2xl font-bold" >{coin}</p>
         </div>
         
         </>):(

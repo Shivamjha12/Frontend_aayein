@@ -17,7 +17,7 @@ import Cookies from 'js-cookie';
 import loader from "./Assets/loader.gif";
 function App() {
   
-  const production_url = "https://97aa285b-a2b1-4f48-95c6-3a55e1d24c0e-00-3phaaqjxkkrnz.riker.replit.dev";
+  const production_url = 'https://backend-api-8pga.onrender.com';
   const [user,setUser] = useState(null);
   const navigate = useNavigate();
   const [meraToken,setMeratoken] = useState('None');
@@ -28,7 +28,7 @@ function App() {
         async () => {
             // Cookies.set('name', 'Shivam Jha', { expires: 7 });
             const token = Cookies.get('meraToken');
-            console.log(token);
+            // console.log(token);
             setMeratoken(token);
             // const name = Cookies.get('name');
             // console.log(name,"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX----------------------xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
@@ -41,14 +41,14 @@ function App() {
             credentials:'include',
             });
             const content = await response.json();
-            console.log(content.detail);
+            // console.log(content.detail);
             if(content.email){
               await setUser(content.email);
             }
             else{
               setUser('notUser');
             }
-            console.log(user, "here we checking the data is set in user or not");
+            // console.log(user, "here we checking the data is set in user or not");
             const userProfile = await fetch(`${production_url}/api-user/v1/getUser/${user}`,{
               // mode:'no-cors',
               headers:{'Content-Type':'application/json'},
@@ -56,6 +56,7 @@ function App() {
               });
               const Usercontent = await userProfile.json();
               setUserProfile(Usercontent);
+              console.log(Usercontent,"user profile");
         }
     )();
 },[user,meraToken]);
@@ -73,10 +74,10 @@ if(user==null){
     <Route path="/" element={user==='notUser'?(<Login/>):(<LandingPage/>)}/>
     <Route path="/signin" element={<Login/>}/>
     <Route path="/signup" element={<Signup/>}/>
-    <Route path="/profile" element={userProfile.gender!==""?(<></>):(<UserProfileDetails/>)}/>
-    <Route path="/addcontact" element={<AddContact/>}/>
+    <Route path="/profile" element={userProfile.gender!==""?(<UserProfile userDataPassed={userProfile}/>):(<UserProfileDetails/>)}/>
+    <Route path="/addcontact" element={<AddContact currentUser={user}/>}/>
     <Route path="/creategroup" element={<CreateGroup/>}/>
-    <Route path="/chat" element={<ChatPage/>}/>
+    <Route path="/chat" element={<ChatPage user={user} />}/>
     </Routes>
     </div>
     </>

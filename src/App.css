@@ -11,3 +11,56 @@
 .middleHeader0{
     margin: 0rem 20rem 0rem 2rem;
 }
+.chatPageMain{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    
+}
+.ChatPageSendBox{
+    margin: 0rem 0rem 5rem 0rem;
+    /* border-left: 1px solid #525252; */
+}
+.chatPageFriendList{
+    margin: 0rem 0rem 0rem 0rem;
+}
+.messageContent{
+    width: 100%;
+    height: 35rem;
+    border-left: 1px solid #525252;
+    border-top: 1px solid #525252;
+}
+.UserImage{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 1rem 1rem 1rem;
+}
+.user-card{
+    display: flex;
+    align-items: center;        
+    gap: 1rem;
+    border-top: 1px solid #525252;
+    border-bottom: 1px solid #525252;
+    border-left: 1px solid #525252;
+    border-right: 1px solid #525252;
+    width: 25rem;
+    margin: 1rem 1rem 1rem 1rem;
+    cursor: pointer;
+}
+.lastOnline{
+    margin: 0rem 0rem 0rem 0rem;
+}
+.userImage2{
+    display: flex-column;
+    justify-content: center;
+    gap: 2rem;
+}
+.userCardImageIcon{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
+.mainMessageComponent{
+    height: 34rem;
+}

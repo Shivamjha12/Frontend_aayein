@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const UserProfile = () => {
+const UserProfile = ({userDataPassed}) => {
   const [userData, setUserData] = useState({
     name: "John Doe",
     email: "john.doe@example.com",
@@ -10,17 +10,14 @@ const UserProfile = () => {
     gender: "male",
   });
 
-  const [chatHistory, setChatHistory] = useState([
-    { name: "John Doe", message: "Hello, how are you?" },
-    { name: "Alice", message: "Hi John, I'm good. How about you?" },
-    { name: "John Doe", message: "I'm doing well, thanks for asking!" },
-    // Add more chat messages as needed
-  ]);
-
+  console.log(userDataPassed,"---------------------999999900000000000000000000000---------------------")
+  const production_url = 'https://backend-api-8pga.onrender.com';
+  
   // Simulate fetching user data from an API or database
   useEffect(() => {
     // Fetch user data logic goes here (replace with actual data fetching)
     // For now, use the initial state as the user data
+    // setUserData(userDataPassed);
   }, []);
 
   return (
@@ -45,35 +42,35 @@ const UserProfile = () => {
             />
           </div>
           <div>
-            <p className="text-blue-400 underline hover:cursor-pointer">update profile picture</p>
+          
           </div>
         </div>
         <div className="mt-4">
           <h1 className="text-2xl font-bold mb-4">User Profile</h1>
           <div className="flex gap-4 mb-4">
             <strong>Name:</strong>
-            {userData.name}
-            <p className="underline text-blue-400 hover:cursor-pointer">Edit</p>
+            {userDataPassed.name}
+            
           </div>
           <div className="flex gap-4 mb-4">
-            <strong>Email:</strong> {userData.email}
-            <p className="underline text-blue-400 hover:cursor-pointer">Edit</p>
+            <strong>Email:</strong> {userDataPassed.email}
+            
           </div>
           <div className="flex gap-4 mb-4">
-            <strong>Contact Number:</strong> {userData.contactNumber}
-            <p className="underline text-blue-400 hover:cursor-pointer">Edit</p>
+            <strong>Contact Number:</strong> {userDataPassed.contactNumber}
+            
           </div>
           <div className="flex gap-4 mb-4">
-            <strong>Alternative Number:</strong> {userData.alternativeNumber}
-            <p className="underline text-blue-400 hover:cursor-pointer">Edit</p>
+            <strong>Alternative Number:</strong> {userDataPassed.alternativeNumber}
+            
           </div>
           <div className="flex gap-4 mb-4">
-            <strong>Age:</strong> {userData.age}
-            <p className="underline text-blue-400 hover:cursor-pointer">Edit</p>
+            <strong>Age:</strong> {userDataPassed.age}
+            
           </div>
           <div className="flex gap-4 mb-4">
-            <strong>Gender:</strong> {userData.gender}
-            <p className="underline text-blue-400 hover:cursor-pointer">Edit</p>
+            <strong>Gender:</strong> {userDataPassed.gender}
+            
           </div>
         </div>
       </div>

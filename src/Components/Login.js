@@ -5,7 +5,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const production_url = 'https://97aa285b-a2b1-4f48-95c6-3a55e1d24c0e-00-3phaaqjxkkrnz.riker.replit.dev';
+  const production_url =  'https://backend-api-8pga.onrender.com';
 
   const onSubmit = async (e)=>{
     e.preventDefault();
