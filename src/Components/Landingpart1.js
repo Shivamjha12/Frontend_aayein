@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 
-const Landingpart1 = () => {
+const Landingpart1 = ({user}) => {
   return (
     <div>
       <div className="">
@@ -28,7 +28,7 @@ const Landingpart1 = () => {
               </h1>
             </div>
 
-            <div className="flex gap-4">
+            {user==='notUser'?(<div className="flex gap-4">
               <div className="font-semibold mt-2 flex">
                 <button className="border-2 p-2 ">
                   SIGN UP WITH EMAIL ADDRESS
@@ -40,7 +40,8 @@ const Landingpart1 = () => {
                   SIGN UP WITH GOOGLE
                 </button>
               </div>
-            </div>
+            </div>):(<></>)
+            }
           </div>
 
           <div className="flex justify-center items-center ">

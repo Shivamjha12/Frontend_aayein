@@ -2,7 +2,7 @@ import React from "react";
 import Landingpart1 from "./Landingpart1";
 import LandingPart2 from "./LandingPart2";
 
-const LandingPage = () => {
+const LandingPage = ({user}) => {
   return (
     <div>
       <div className=" h-[690px] w-full bg-gradient-to-b from-black via-black to-gray-800 text-white md:pt-0 pt-52">

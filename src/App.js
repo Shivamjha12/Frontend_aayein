@@ -21,7 +21,7 @@ function App() {
   const [user,setUser] = useState(null);
   const navigate = useNavigate();
   const [meraToken,setMeratoken] = useState('None');
-  const [userProfile,setUserProfile] = useState({"gender":""});
+  const [userProfile,setUserProfile] = useState(null);
 
   useEffect(()=>{
     (
@@ -71,10 +71,10 @@ if(user==null){
     <Header user={user}/>
     <div>
     <Routes>
-    <Route path="/" element={user==='notUser'?(<Login/>):(<LandingPage/>)}/>
+    <Route path="/" element={user==='notUser'?(<Login/>):(<LandingPage user={user}/>)}/>
     <Route path="/signin" element={<Login/>}/>
     <Route path="/signup" element={<Signup/>}/>
-    <Route path="/profile" element={userProfile.gender!==""?(<UserProfile userDataPassed={userProfile}/>):(<UserProfileDetails/>)}/>
+    <Route path="/profile" element={userProfile===null?(<UserProfile userDataPassed={userProfile}/>):(<UserProfileDetails/>)}/>
     <Route path="/addcontact" element={<AddContact currentUser={user}/>}/>
     <Route path="/creategroup" element={<CreateGroup/>}/>
     <Route path="/chat" element={<ChatPage user={user} />}/>

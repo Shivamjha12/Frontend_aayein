@@ -1,11 +1,33 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Cookies from 'js-cookie';
+import LoginButton from "./Glogin";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const production_url =  'https://backend-api-8pga.onrender.com';
+  
+  async function checkCoins(){
+    const response = await fetch(`${production_url}/api/v1/coincheck/${email}`,{
+      method: "POST",
+      headers:{'Content-Type':'application/json'},
+      credentials:'include',
+      });
+      const content = await response.json();
+      console.log(content,"coins");
+  }
+
+  const openGoogleSignInWindow = () => {
+    const url = 'https://backend-api-8pga.onrender.com/api-user/v1/auth/google/';
+    window.open(url, '_blank');
+  };
+
+  const onGoogleSubmit = ()=>{
+    navigate(`${production_url}/api-user/v1/auth/google/`);
+  }
+
 
   const onSubmit = async (e)=>{
     e.preventDefault();
@@ -35,9 +57,13 @@ const Login = () => {
     {
     // setJwt(content.jwt)
     // console.log(jwt)
+
+
+    // coincheck/<str:user_id>
     Cookies.set('meraToken', content.jwt, { expires: 24*60*60 });
     // Cookies.set('jwt', jwt, { expires: 60 * 60 * 24 * 1, httpOnly: true });
     // console.log(content.jwt," here is the jwt-> ",jwt,"here is login page content");
+    checkCoins();
     navigate('/');
     navigate(0);
     }
@@ -94,16 +120,17 @@ const Login = () => {
                 required
               />
             </div>
+            
+            
             <button
               type="submit"
-              className=" bg-blue-900 text-white font-bold py-2 px-4 w-28 rounded-md hover:bg-blue-600"
+              className="bg-blue-900 text-white font-bold py-2 px-4 w-28 rounded-md hover:bg-blue-600"
             >
               Login
             </button>
             <p className="text-white mt-2">Need Help ?</p>
-            <div className="flex gap-2">
-              <p className="text-gray-500 mt-2">New to Aayein?</p>
-              <p className="text-white mt-2 underline hover:cursor-pointer ">Sign up now.</p>
+            <div>
+              <LoginButton/>
             </div>
           </form>
         </div>

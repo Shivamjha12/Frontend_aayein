@@ -1,26 +1,21 @@
 import React, { useState } from "react";
 
 const UserProfileDetails = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    contactNumber: "",
-    alternativeNumber: "",
-    age: "",
-    gender: "",
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const [name,setName]=useState('');
+  const [email,setEmail]=useState('');
+  const [contactNumber,setContactNumber]=useState('');
+  const [age,setAge]=useState('');
+  const [gender,setGender]=useState('');
+  
+
+  
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form data submitted:", formData);
+    
+    console.log("Form data submitted:");
   };
 
   return (
@@ -42,8 +37,8 @@ const UserProfileDetails = () => {
               type="text"
               id="name"
               name="name"
-              value={formData.name}
-              onChange={handleChange}
+              value={name}
+              onChange={(e)=>{setName(e.target.value)}}
               className="mt-1 p-2 w-full border rounded-md"
             />
           </div>
@@ -58,8 +53,8 @@ const UserProfileDetails = () => {
               type="email"
               id="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e)=>{setEmail(e.target.value)}}
               className="mt-1 p-2 w-full border rounded-md"
             />
           </div>
@@ -74,24 +69,8 @@ const UserProfileDetails = () => {
               type="tel"
               id="contactNumber"
               name="contactNumber"
-              value={formData.contactNumber}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border rounded-md"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="alternativeNumber"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Alternative Number
-            </label>
-            <input
-              type="tel"
-              id="alternativeNumber"
-              name="alternativeNumber"
-              value={formData.alternativeNumber}
-              onChange={handleChange}
+              value={contactNumber}
+              onChange={(e)=>{setContactNumber(e.target.value)}}
               className="mt-1 p-2 w-full border rounded-md"
             />
           </div>
@@ -106,8 +85,8 @@ const UserProfileDetails = () => {
               type="number"
               id="age"
               name="age"
-              value={formData.age}
-              onChange={handleChange}
+              value={age}
+              onChange={(e)=>{setAge(e.target.value)}}
               className="mt-1 p-2 w-full border rounded-md"
             />
           </div>
@@ -121,14 +100,13 @@ const UserProfileDetails = () => {
             <select
               id="gender"
               name="gender"
-              value={formData.gender}
-              onChange={handleChange}
+              value={gender}
+              onChange={(e)=>{setGender(e.target.value)}}
               className="mt-1 p-2 w-full border rounded-md"
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="other">Other</option>
             </select>
           </div>
           <button
